@@ -25,6 +25,7 @@
 
 #include "raylib.h"
 #include "screens.h"
+#include <stdio.h>
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -50,22 +51,48 @@ void UpdateTitleScreen(void)
     // TODO: Update TITLE screen variables here!
 
     // Press enter or tap to change to GAMEPLAY screen
-    if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
-    {
-        //finishScreen = 1;   // OPTIONS
-        finishScreen = 2;   // GAMEPLAY
-        PlaySound(fxCoin);
+    /*if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))*/
+    /*{*/
+    /*    //finishScreen = 1;   // OPTIONS*/
+    /*    finishScreen = 2;   // GAMEPLAY*/
+    /*    PlaySound(fxCoin);*/
+    /*}*/
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        Vector2 mousePos = GetMousePosition();
+        
+        Rectangle colorButton = {360, 220, 100, 35};
+        if (CheckCollisionPointRec(mousePos, colorButton))
+        {
+          finishScreen =2;
+          PlaySound(fxCoin);
+        }
+
     }
+  
 }
 
 // Title Screen Draw logic
 void DrawTitleScreen(void)
-{
+{  
+    // order of drawing is very important
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GOLD);
     // TODO: Draw TITLE screen here!
-    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GREEN);
-    Vector2 pos = { 20, 10 };
-    DrawTextEx(font, "TITLE SCREEN", pos, font.baseSize*3.0f, 4, DARKGREEN);
-    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
+    const int padding = 10;
+    const int buttonWidth = 100;
+    const int buttonHeight = 30;
+    
+    Vector2 colorButtonPos = {padding + 350 ,padding + 210};
+    DrawRectangleRec((Rectangle){colorButtonPos.x, colorButtonPos.y, buttonWidth, buttonHeight}, GRAY);
+    DrawText("START", colorButtonPos.x + buttonWidth / 2 - MeasureText("Snow Color", 10) / 2, colorButtonPos.y + buttonHeight / 2 - 5, 15, WHITE);
+
+
+
+
+    //Vector2 fps = {10, 10};
+    DrawFPS(10, 10);
+    Vector2 pos = { 150, 190 };
+    DrawTextEx(font, "CYPHER THE LOST CODECS", pos, font.baseSize*3.0f, 4, WHITE);
+    DrawText(TextFormat("Mouse: %.1f, %.1f", GetMousePosition().x, GetMousePosition().y), 400, 10, 20, RED);
 }
 
 // Title Screen Unload logic

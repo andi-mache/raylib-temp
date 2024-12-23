@@ -59,7 +59,7 @@ int main(void)
 {
     // Initialization
     //---------------------------------------------------------
-    InitWindow(screenWidth, screenHeight, "raylib game template");
+    InitWindow(screenWidth, screenHeight, "Cypher The Lost Codex");
 
     InitAudioDevice();      // Initialize audio device
 
