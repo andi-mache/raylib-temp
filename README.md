@@ -53,7 +53,7 @@ cmake --build build
 
 - cmake will automatically download a current release of raylib but if you want to use your local version you can pass `-DFETCHCONTENT_SOURCE_DIR_RAYLIB=<dir_with_raylib>` 
 
-## $(Game Title)
+## CYPHER THE LAST CODEX
 
 ![$(Game Title)](screenshots/screenshot000.png "$(Game Title)")
 
