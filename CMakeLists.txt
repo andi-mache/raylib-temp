@@ -18,6 +18,16 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(raylib)
 
+set(RAYGUI_VERSION 4.0)
+FetchContent_Declare(
+  raygui 
+  DOWNLOAD_EXTRACT_TIMESTAMP OFF 
+  URL https://github.com/raysan5/raygui/archive/refs/tags/${RAYGUI_VERSION}.tar.gz 
+  FIND_PACKAGE_ARGS
+
+)
+FetchContent_MakeAvailable(raygui)
+
 # Our Project
 add_executable(${PROJECT_NAME})
 add_subdirectory(src)
@@ -42,7 +52,7 @@ else()
 endif()
 
 #set(raylib_VERBOSE 1)
-target_link_libraries(${PROJECT_NAME} raylib)
+target_link_libraries(${PROJECT_NAME} raylib raygui)
 
 # Web Configurations
 if ("${PLATFORM}" STREQUAL "Web")
